@@ -81,7 +81,7 @@ return {
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("cs_lsp_attach", { clear = true }),
-        callback = require("plugins.lsp.lsp-attach"),
+        callback = require("plugins.lsp.on-attach"),
       })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
