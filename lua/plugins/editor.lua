@@ -381,26 +381,54 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    opts_extend = { "spec" },
     opts = {
-      plugins = { spelling = true },
-      defaults = {
-        mode = { "n", "v" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader>c"] = { name = "+comment" },
-        ["<leader>F"] = { name = "+file" },
-        ["<leader>u"] = { name = "+util" },
-        ["<leader>s"] = { name = "+search" },
-        ["<leader>r"] = { name = "+replace" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>l"] = { name = "+lsp" },
-        ["<leader>t"] = { name = "+trouble" },
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "<leader>c", group = "comment" },
+          { "<leader>F", group = "file" },
+          { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
+          { "<leader>s", group = "search" },
+          { "<leader>r", group = "replace" },
+          { "<leader>g", group = "git" },
+          { "<leader>gh", group = "git hunks" },
+          { "<leader>l", group = "lsp" },
+          { "<leader>t", group = "trouble" },
+          { "z", group = "fold" },
+          { "[", group = "prev" },
+          { "]", group = "next" },
+          {
+            "<leader>b",
+            group = "buffer",
+            expand = function()
+              return require("which-key.extras").expand.buf()
+            end,
+          },
+          -- better descriptions
+          { "gx", desc = "Open with system app" },
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Keymaps (which-key)",
+      },
+      {
+        "<c-w><space>",
+        function()
+          require("which-key").show({ keys = "<c-w>", loop = true })
+        end,
+        desc = "Window Hydra Mode (which-key)",
       },
     },
     config = function(_, opts)
       local wk = require("which-key")
       wk.setup(opts)
-      wk.register(opts.defaults)
     end,
   },
 

@@ -243,35 +243,14 @@ return {
   {
     "karb94/neoscroll.nvim",
     event = "VeryLazy",
-    config = function()
-      require("neoscroll").setup({ easing_function = "quadratic" })
-
-      local t = {}
-      t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "70", [['sine']] } }
-      t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "70", [['sine']] } }
-      t["<C-b>"] = {
-        "scroll",
-        { "-vim.api.nvim_win_get_height(0)", "true", "100", [['circular']] },
-      }
-      t["<C-f>"] = {
-        "scroll",
-        { "vim.api.nvim_win_get_height(0)", "true", "100", [['circular']] },
-      }
-      t["<C-y>"] = { "scroll", { "-0.10", "false", "100", nil } }
-      t["<C-e>"] = { "scroll", { "0.10", "false", "100", nil } }
-      t["zt"] = { "zt", { "100" } }
-      t["zz"] = { "zz", { "100" } }
-      t["zb"] = { "zb", { "100" } }
-
-      require("neoscroll.config").set_mappings(t)
-    end,
+    config = true,
   },
 
   {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
     opts = function()
-      local logo = {
+      local logos = {
         [[   ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣴⣶⣶⣶⣶⣶⠶⣶⣤⣤⣀⠀⠀⠀⠀⠀⠀ ]],
         [[ ⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⠁⠀⢀⠈⢿⢀⣀⠀⠹⣿⣿⣿⣦⣄⠀⠀⠀ ]],
         [[ ⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⠿⠀⠀⣟⡇⢘⣾⣽⠀⠀⡏⠉⠙⢛⣿⣷⡖⠀ ]],
@@ -284,7 +263,7 @@ return {
         [[ ⠀⠀⠀⠈⢿⣿⣿⣿⣿⣿⣷⣤⣤⣤⣤⣭⣭⣭⣭⣭⣥⣤⣤⣤⣴⣟⠁    ]],
       }
 
-      logo = string.rep("\n", 8) .. table.concat(logo, "\n") .. "\n\n"
+      local logo = string.rep("\n", 8) .. table.concat(logos, "\n") .. "\n\n"
 
       local opts = {
         theme = "doom",
