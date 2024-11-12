@@ -513,6 +513,13 @@ return {
     },
   },
 
+  -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+  {
+    "sindrets/diffview.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+  },
+
   -- buffer remove
   {
     "echasnovski/mini.bufremove",
@@ -550,5 +557,21 @@ return {
     "kevinhwang91/nvim-bqf",
     dependencies = { "junegunn/fzf" },
     ft = "qf",
+  },
+
+  -- Run your tests at the speed of thought
+  {
+    "vim-test/vim-test",
+    keys = {
+      { "<F5>", "<cmd>TestFile<cr>", desc = "TestFile" },
+      { "<M-5>", "<cmd>TestFile", desc = "TestFile" },
+      { "<F6>", "<cmd>TestNearest<cr>", desc = "TestNearest" },
+      { "<M-6>", "<cmd>TestNearest<cr>", desc = "TestNearest" },
+    },
+    cmd = { "TestFile", "TestNearest" },
+    init = function()
+      vim.g["test#strategy"] = "neovim"
+      vim.g["test#go#gotest#options"] = { all = "-v -count=1" }
+    end,
   },
 }

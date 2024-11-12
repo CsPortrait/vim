@@ -251,7 +251,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         go = { "gofumpt", "golines", "goimports" },
-        markdown = { "markdownlint" },
+        markdown = { "prettierd" },
         sh = { "shfmt" },
         json = { "prettierd" },
         proto = { "clang-format" },
@@ -268,6 +268,7 @@ return {
         markdown = { "markdownlint" },
         go = { "golangcilint" },
         json = { "jsonlint" },
+        proto = { "protolint" },
       }
 
       lint.linters.cspell = require("lint.util").wrap(lint.linters.cspell, function(diagnostic)
