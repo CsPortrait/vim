@@ -151,6 +151,7 @@ return {
           globalstatus = true,
           disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
         },
+        extensions = { "neo-tree" },
         sections = {
           lualine_a = {
             {
@@ -233,15 +234,23 @@ return {
             "encoding",
             "progress",
           },
-          lualine_z = { "location" },
+          lualine_z = {
+            "location",
+            "selectioncount",
+          },
         },
-        extensions = { "neo-tree" },
       }
     end,
   },
 
   {
     "karb94/neoscroll.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
+
+  {
+    "sphamba/smear-cursor.nvim",
     event = "VeryLazy",
     config = true,
   },

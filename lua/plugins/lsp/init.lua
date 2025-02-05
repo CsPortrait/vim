@@ -177,8 +177,12 @@ return {
         mapping = {
           ["<C-y>"] = cmp.mapping.confirm(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-b>"] = function()
+            feedkey("<Left>", "")
+          end,
+          ["<C-f>"] = function()
+            feedkey("<Right>", "")
+          end,
           ["<C-n>"] = function()
             if cmp.visible() then
               cmp.select_next_item()
@@ -265,7 +269,7 @@ return {
     config = function()
       local lint = require("lint")
       lint.linters_by_ft = {
-        markdown = { "markdownlint" },
+        -- markdown = { "markdownlint" },
         go = { "golangcilint" },
         json = { "jsonlint" },
         proto = { "protolint" },
@@ -284,7 +288,7 @@ return {
         callback = function()
           require("lint").try_lint()
 
-          for _, t in ipairs({ "neo-tree", "minifiles", "qf", "trouble", "dashboard" }) do
+          for _, t in ipairs({ "neo-tree", "minifiles", "qf", "trouble", "dashboard", "mason" }) do
             if vim.bo.filetype == t then
               return
             end
